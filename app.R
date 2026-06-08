@@ -548,7 +548,7 @@ server <- function(input, output, session) {
   
   output$n_interventions <- renderText(n_distinct(filtered_interventions()$intervention_id))
   output$n_studies_vb <- renderText({
-  n_distinct(filtered_interventions()$study_id)
+    nrow(filtered_studies())
 })
   output$n_domains       <- renderText(n_distinct(filtered_interventions()$Domain, na.rm = TRUE))
   
