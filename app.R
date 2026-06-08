@@ -510,7 +510,7 @@ server <- function(input, output, session) {
   # ── Sidebar summary ───────────────────────────────────────
   output$sidebar_summary <- renderUI({
     tagList(
-      tags$small(strong(n_distinct(filtered_interventions()$study_id)), " studies selected"), br(),
+      tags$small(strong(nrow(filtered_studies())), " studies selected"), br(),
       tags$small(strong(n_distinct(filtered_interventions()$intervention_id)),
                  " interventions selected")
     )
@@ -548,8 +548,8 @@ server <- function(input, output, session) {
   
   output$n_interventions <- renderText(n_distinct(filtered_interventions()$intervention_id))
   output$n_studies_vb <- renderText({
-    n_distinct(filtered_interventions()$study_id)
-  })
+  n_distinct(filtered_interventions()$study_id)
+})
   output$n_domains       <- renderText(n_distinct(filtered_interventions()$Domain, na.rm = TRUE))
   
   output$interactive_chart  <- renderPlotly(bar_chart(interventions_unique(), "is_interactive"))
