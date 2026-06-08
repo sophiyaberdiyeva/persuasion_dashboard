@@ -547,7 +547,9 @@ server <- function(input, output, session) {
   # ── PAGE 2 ────────────────────────────────────────────────
   
   output$n_interventions <- renderText(n_distinct(filtered_interventions()$intervention_id))
-  output$n_studies_vb    <- renderText(nrow(filtered_studies()))
+  output$n_studies_vb <- renderText({
+    n_distinct(filtered_interventions()$study_id)
+  })
   output$n_domains       <- renderText(n_distinct(filtered_interventions()$Domain, na.rm = TRUE))
   
   output$interactive_chart  <- renderPlotly(bar_chart(interventions_unique(), "is_interactive"))
